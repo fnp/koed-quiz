@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block "body" %}
+
+
+<h1>{{ question.title }}</h1>
+<div>
+{{ question.text }}
+</div>
+
+<div>
+
+
+
+<form method='post'>
+{% csrf_token %}
+{{ form.answer.errors }}
+{{ form.answer }}
+
+{% if valid %}
+    <input type='submit' />
+
+    {% if previous_url %}
+        <a href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
+    {% endif %}
+
+{% else %}
+    {% if valid_url %}
+        <a href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
+    {% else %}
+        <a href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+    {% endif %}
+{% endif %}
+
+</form>
+</div>
+
+
+<div>
+{{ question.description }}
+</div>
+
+
+{% endblock %}

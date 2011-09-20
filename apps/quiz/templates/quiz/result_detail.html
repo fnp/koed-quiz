@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+
+{% block "body" %}
+
+<h1>{{ result.title }}</h1>
+
+
+
+<div>
+{{ result.text }}
+</div>
+
+
+
+{% if valid %}
+    {% if previous_url %}
+        <a href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
+    {% endif %}
+{% else %}
+    {% if valid_url %}
+        <a href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
+    {% else %}
+        <a href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+    {% endif %}
+{% endif %}
+
+
+
+<a href='{% url "quiz" %}'>{% trans "Start again" %}</a>
+
+{% endblock %}
