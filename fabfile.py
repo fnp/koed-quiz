@@ -10,6 +10,7 @@ import os
 # ==========
 # Globals
 env.project_name = 'koedquiz'
+env.wsgi_name = env.project_name
 env.use_south = True
 env.virtualenv = '/usr/bin/virtualenv'
 
@@ -44,6 +45,7 @@ def openquiz():
     env.server_admin = 'Radek Czajka <radoslaw.czajka@nowoczesnapolska.org.pl>'
     env.access_log = 'koedquiz/openquiz.log'
     env.error_log = 'koedquiz/openquiz-errors.log'
+    env.wsgi_name = 'openquiz'
 
 def pdquiz():
     env.hosts = ['giewont.icm.edu.pl']
@@ -53,6 +55,7 @@ def pdquiz():
     env.server_admin = 'Radek Czajka <radoslaw.czajka@nowoczesnapolska.org.pl>'
     env.access_log = 'koedquiz/pdquiz.log'
     env.error_log = 'koedquiz/pdquiz-errors.log'
+    env.wsgi_name = 'pdquiz'
 
 
 
