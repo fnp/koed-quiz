@@ -14,6 +14,15 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ['title', 'quiz']
 
 
+class ResultAdmin(admin.ModelAdmin):
+    list_display = ['title', 'quiz']
+
+
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+
+
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Result)
-admin.site.register(Quiz)
+admin.site.register(Result, ResultAdmin)
+admin.site.register(Quiz, QuizAdmin)

@@ -40,6 +40,7 @@ class Result(models.Model):
     class Meta:
         verbose_name = _('result')
         verbose_name_plural = _('results')
+        ordering = ['quiz', 'title']
 
     def __unicode__(self):
         return self.title

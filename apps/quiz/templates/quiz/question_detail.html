@@ -11,9 +11,11 @@
 
 
 <h2>{{ question.title }}</h2>
-<div>
-{{ question.text|safe }}
-</div>
+{% if question.test %}
+    <div>
+    {{ question.text|safe }}
+    </div>
+{% endif %}
 
 <div>
 
@@ -33,9 +35,9 @@
 
 {% else %}
     {% if valid_url %}
-        <a class='big-button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
+        <a class='button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
     {% else %}
-        <a class='big-button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+        <a class='button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
     {% endif %}
 {% endif %}
 
@@ -43,9 +45,11 @@
 </div>
 
 
-<div id='description'>
-{{ question.description|safe }}
-</div>
+{% if question.description %}
+    <div id='description'>
+    {{ question.description|safe }}
+    </div>
+{% endif %}
 
 
 {% endblock %}

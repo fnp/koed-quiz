@@ -11,23 +11,25 @@
 
 <h2>{{ result.title }}</h2>
 
-<div>
-{{ result.text|safe }}
-</div>
+{% if result.text %}
+    <div>
+    {{ result.text|safe }}
+    </div>
+{% endif %}
 
 
 
 {% if valid %}
     {% if previous_url %}
-        <a class='big-button' href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
+        <a class='button' href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
     {% endif %}
 {% else %}
     {% if valid_url %}
-        <a class='big-button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
+        <a class='button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
     {% endif %}
 {% endif %}
 
 
-<a class='big-button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+<a class='button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
 
 {% endblock %}
