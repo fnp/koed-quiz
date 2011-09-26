@@ -11,6 +11,7 @@ import os
 # Globals
 env.project_name = 'koedquiz'
 env.use_south = True
+env.virtualenv = '/usr/bin/virtualenv'
 
 # Servers
 def localhost():
@@ -25,7 +26,6 @@ def localhost():
     env.hosts = ['localhost']
     env.user = getuser()
     env.path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test-deployment')
-    env.virtualenv = '/usr/bin/virtualenv'
     # This goes to VHost configuration
     env.server_name = 'koedquiz.example.com'
     env.server_admin = 'koedquiz <koedquiz@koedquiz.example.com>'
@@ -36,8 +36,18 @@ def localhost():
 
 # add additional servers here
 
+def openquiz():
+    env.hosts = ['giewont.icm.edu.pl']
+    env.user = 'rczajka'
+    env.path = '/srv/koedquiz/openquiz'
+    env.server_name = 'otwartosc.nowoczesnapolska.org.pl'
+    env.server_admin = 'Radek Czajka <radoslaw.czajka@nowoczesnapolska.org.pl>'
+    env.access_log = 'koedquiz/openquiz.log'
+    env.error_log = 'koedquiz/openquiz-errors.log'
 
-servers = [localhost]
+
+
+servers = [localhost, openquiz]
 
 # =========
 # = Tasks =
