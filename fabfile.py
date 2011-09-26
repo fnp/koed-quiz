@@ -45,9 +45,18 @@ def openquiz():
     env.access_log = 'koedquiz/openquiz.log'
     env.error_log = 'koedquiz/openquiz-errors.log'
 
+def pdquiz():
+    env.hosts = ['giewont.icm.edu.pl']
+    env.user = 'rczajka'
+    env.path = '/srv/koedquiz/pdquiz'
+    env.server_name = 'domena.nowoczesnapolska.org.pl'
+    env.server_admin = 'Radek Czajka <radoslaw.czajka@nowoczesnapolska.org.pl>'
+    env.access_log = 'koedquiz/pdquiz.log'
+    env.error_log = 'koedquiz/pdquiz-errors.log'
 
 
-servers = [localhost, openquiz]
+
+servers = [localhost, openquiz, pdquiz]
 
 # =========
 # = Tasks =
