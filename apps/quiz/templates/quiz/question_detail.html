@@ -2,35 +2,40 @@
 {% load i18n %}
 {% load url from future %}
 
+
+{% block "title" %}{{ question.quiz.name }}{% endblock %}
+{% block "header" %}{{ question.quiz.name }}{% endblock %}
+
+
 {% block "body" %}
 
 
-<h1>{{ question.title }}</h1>
+<h2>{{ question.title }}</h2>
 <div>
-{{ question.text }}
+{{ question.text|safe }}
 </div>
 
 <div>
 
 
 
-<form method='post'>
+<form class='question' method='post'>
 {% csrf_token %}
 {{ form.answer.errors }}
 {{ form.answer }}
 
 {% if valid %}
-    <input type='submit' />
+    <button>{% trans "Send answer" %}</button>
 
     {% if previous_url %}
-        <a href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
+        <a class='button' href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
     {% endif %}
 
 {% else %}
     {% if valid_url %}
-        <a href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
+        <a class='big-button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
     {% else %}
-        <a href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+        <a class='big-button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
     {% endif %}
 {% endif %}
 
@@ -38,8 +43,8 @@
 </div>
 
 
-<div>
-{{ question.description }}
+<div id='description'>
+{{ question.description|safe }}
 </div>
 
 

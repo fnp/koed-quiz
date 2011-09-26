@@ -6,8 +6,9 @@ from django.conf import settings
 
 
 class Quiz(Site):
+    description = models.TextField()
+
     class Meta:
-        proxy=True
         verbose_name = _('quiz')
         verbose_name_plural = _('quizzes')
 

@@ -8,10 +8,17 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'Quiz'
+        db.create_table('quiz_quiz', (
+            ('site_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['sites.Site'], unique=True, primary_key=True)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+        ))
+        db.send_create_signal('quiz', ['Quiz'])
+
         # Adding model 'Result'
         db.create_table('quiz_result', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['quiz.Quiz'])),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('text', self.gf('django.db.models.fields.TextField')()),
@@ -21,7 +28,7 @@ class Migration(SchemaMigration):
         # Adding model 'Question'
         db.create_table('quiz_question', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('quiz', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['quiz.Quiz'])),
             ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
             ('ordering', self.gf('django.db.models.fields.SmallIntegerField')()),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
@@ -56,6 +63,9 @@ class Migration(SchemaMigration):
         # Removing unique constraint on 'Question', fields ['quiz', 'slug']
         db.delete_unique('quiz_question', ['quiz_id', 'slug'])
 
+        # Deleting model 'Quiz'
+        db.delete_table('quiz_quiz')
+
         # Deleting model 'Result'
         db.delete_table('quiz_result')
 
@@ -81,18 +91,20 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'ordering': ('django.db.models.fields.SmallIntegerField', [], {}),
-            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sites.Site']"}),
+            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['quiz.Quiz']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         'quiz.quiz': {
-            'Meta': {'ordering': "('domain',)", 'object_name': 'Quiz', 'db_table': "'django_site'", '_ormbases': ['sites.Site'], 'proxy': 'True'}
+            'Meta': {'ordering': "('domain',)", 'object_name': 'Quiz', '_ormbases': ['sites.Site']},
+            'description': ('django.db.models.fields.TextField', [], {}),
+            'site_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['sites.Site']", 'unique': 'True', 'primary_key': 'True'})
         },
         'quiz.result': {
             'Meta': {'object_name': 'Result'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sites.Site']"}),
+            'quiz': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['quiz.Quiz']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})

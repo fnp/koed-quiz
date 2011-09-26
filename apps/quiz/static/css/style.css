@@ -1,0 +1,73 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: arial, verdana, sans-serif;
+}
+#body {
+    max-width: 40em;
+    margin: auto;
+}
+
+#header {
+    background: #222;
+    color: #eee;
+    padding: 1em 0;
+    
+}
+h1 {
+    font-size: 2em;
+    max-width: 20em;
+    margin: auto;
+    margin-top: 0;
+    color: #eee;
+}
+
+button {
+    background: #999;
+    color: white;
+    padding: 1em;
+    text-decoration:none;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    width: 100%;
+}
+button:hover {
+    background: #aaa;
+}
+
+a.big-button {
+    background: #999;
+    color: white;
+    padding: 1em;
+    text-decoration:none;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+    display: block;
+    text-align: center;
+    margin-top: 1em;
+}
+
+a.big-button:hover {
+    background: #aaa;
+}
+
+.question li {
+    list-style: none;
+    margin-bottom: 1em;
+}
+
+.errorlist {
+    font-weight: bold;
+    color: red;
+}
+
+#description {
+    margin-top: 1em;
+    font-size: .9em;
+    color: #444;
+    padding: 0 1em;
+    border: 1px solid #ddd;
+    border-radius: 1em;
+}

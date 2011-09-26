@@ -3,32 +3,31 @@
 {% load url from future %}
 
 
+{% block "title" %}{{ result.quiz.name }}{% endblock %}
+{% block "header" %}{{ result.quiz.name }}{% endblock %}
+
+
 {% block "body" %}
 
-<h1>{{ result.title }}</h1>
-
-
+<h2>{{ result.title }}</h2>
 
 <div>
-{{ result.text }}
+{{ result.text|safe }}
 </div>
 
 
 
 {% if valid %}
     {% if previous_url %}
-        <a href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
+        <a class='big-button' href='{{ previous_url }}'>{% trans "Back to last question" %}</a>
     {% endif %}
 {% else %}
     {% if valid_url %}
-        <a href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
-    {% else %}
-        <a href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
+        <a class='big-button' href='{{ valid_url }}'>{% trans "Back to my test" %}</a>
     {% endif %}
 {% endif %}
 
 
-
-<a href='{% url "quiz" %}'>{% trans "Start again" %}</a>
+<a class='big-button' href='{% url "quiz" %}'>{% trans "Start from the beginning" %}</a>
 
 {% endblock %}

@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
+
+{% block "title" %}{{ quiz.name }}{% endblock %}
+{% block "header" %}{{ quiz.name }}{% endblock %}
+
+
 {% block "body" %}
 
-<a href="{{ quiz.get_absolute_url }}">Start quiz!</a>
+<div>
+{{ quiz.description|safe }}
+</div>
+
+<a class='big-button' href="{{ quiz.get_absolute_url }}">Start quiz!</a>
 
 {% endblock %}
