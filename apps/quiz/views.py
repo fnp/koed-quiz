@@ -11,9 +11,9 @@ def question(request, slug=None):
     else:
         question = get_object_or_404(Quiz.current().question_set, slug=slug)
 
-    ticket = request.session.get('ticket')
+    ticket = request.session.get('ticket', [])
     valid = request.path in ticket
-    print ticket, valid
+
     if valid:
         cur_index = ticket.index(request.path)
         if cur_index:
@@ -44,7 +44,7 @@ def question(request, slug=None):
 
 
 def result(request, slug=None):
-    ticket = request.session['ticket']
+    ticket = request.session.get('ticket', [])
     valid = request.path in ticket
 
     if valid:
