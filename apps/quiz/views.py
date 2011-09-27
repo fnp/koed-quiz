@@ -18,7 +18,7 @@ def question(request, slug=None):
         cur_index = ticket.index(request.path)
         if cur_index:
             previous_url = ticket[cur_index - 1]
-    else:
+    elif ticket:
         valid_url = ticket[-1]
 
     if request.method == 'POST' and valid:
