@@ -51,9 +51,8 @@ def result(request, slug=None):
         cur_index = ticket.index(request.path)
         if cur_index:
             previous_url = ticket[cur_index - 1]
-    else:
+    elif ticket:
         valid_url = ticket[-1]
-
 
     result = get_object_or_404(Quiz.current().result_set, slug=slug)
     return render(request, "quiz/result_detail.html", locals())
