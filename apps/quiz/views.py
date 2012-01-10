@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
+# Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
+#
 from django.shortcuts import get_object_or_404, render, redirect
 
 from quiz.forms import QuestionForm

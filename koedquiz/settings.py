@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-# Django settings for koedquiz project.
+# This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
+# Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
+#
 import os.path
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))

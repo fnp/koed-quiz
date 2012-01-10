@@ -1,12 +1,9 @@
-KOED-Quiz
-=========
 
-License
--------
+    KOED-Quiz
 
     Copyright © 2011,2012 Fundacja Nowoczesna Polska <fundacja@nowoczesnapolska.org.pl>
-
-    For full list of contributors see AUTHORS section at the end.
+    
+    For full list of contributors see AUTHORS section in README. 
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -20,15 +17,3 @@ License
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-About
------
-
-Enables creating various openness related tests and quizzes.
-
-
-Authors
--------
-
-* Radek Czajka <radoslaw.czajka@nowoczesnapolska.org.pl>

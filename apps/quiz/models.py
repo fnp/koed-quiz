@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
+# Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
+#
 from django.db import models
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
