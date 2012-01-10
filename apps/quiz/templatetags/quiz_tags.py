@@ -2,12 +2,13 @@
 # This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
 # Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
 #
-from django.shortcuts import render
-
-from django.conf import settings
+from django import template
+from django.utils.safestring import mark_safe
 from quiz.models import Quiz
 
+register = template.Library()
 
-def home(request):
-    quiz = Quiz.current()
-    return render(request, "quiz/home.html", locals())
+
+@register.simple_tag
+def quiz_footer():
+    return mark_safe(Quiz.current().footer)

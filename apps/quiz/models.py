@@ -11,6 +11,7 @@ from django.conf import settings
 
 class Quiz(Site):
     description = models.TextField()
+    footer = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = _('quiz')

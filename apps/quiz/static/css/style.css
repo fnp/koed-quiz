@@ -82,3 +82,17 @@ a.big-button:hover, a.button:hover {
     border: 1px solid #ddd;
     border-radius: 1em;
 }
+footer {
+    font-size: .67em;
+    color: #aaa;
+    padding: .5em;
+    margin-top: 3em;
+    border-top: 1px solid #eee;
+}
+footer a {
+    color: #777;
+    text-decoration: none;
+}
+footer p {
+    margin-top: 0;
+}
