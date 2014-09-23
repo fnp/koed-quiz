@@ -4,6 +4,7 @@
 #
 from django.db import models
 from django.contrib.sites.models import Site
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
@@ -36,6 +37,7 @@ class Quiz(Site):
             return self.get_absolute_url()
 
 
+@python_2_unicode_compatible
 class Result(models.Model):
     quiz = models.ForeignKey(Quiz)
     slug = models.SlugField(db_index=True)
@@ -47,7 +49,7 @@ class Result(models.Model):
         verbose_name_plural = _('results')
         ordering = ['quiz', 'title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @models.permalink
@@ -55,6 +57,7 @@ class Result(models.Model):
         return ('quiz_result', [self.slug])
 
 
+@python_2_unicode_compatible
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz)
     slug = models.SlugField(db_index=True)
@@ -69,7 +72,7 @@ class Question(models.Model):
         ordering = ['quiz', 'ordering']
         unique_together = [['quiz', 'slug'], ['quiz', 'ordering']]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @models.permalink
@@ -84,7 +87,7 @@ class Question(models.Model):
             return self.quiz.where_to()
 
 
-
+@python_2_unicode_compatible
 class Answer(models.Model):
     title = models.CharField(max_length=255)
     question = models.ForeignKey(Question)
@@ -98,7 +101,7 @@ class Answer(models.Model):
         verbose_name_plural = _('answers')
         ordering = ['question', 'ordering']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def where_to(self):

@@ -151,6 +151,6 @@ LOGGING = {
 
 # Load localsettings, if they exist
 try:
-    from localsettings import *
+    from .localsettings import *
 except ImportError:
     pass
