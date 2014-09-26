@@ -20,7 +20,7 @@ class Quiz(Site):
 
     @classmethod
     def current(cls, request):
-        return cls.objects.get(domain=request.get_host())
+        return cls.objects.get(domain=request.get_host().rstrip('.'))
 
     def start(self):
         return self.question_set.all()[0]
