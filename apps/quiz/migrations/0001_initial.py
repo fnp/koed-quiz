@@ -84,7 +84,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answer',
             name='go_to',
-            field=models.ForeignKey(related_name=b'go_tos', blank=True, to='quiz.Question', null=True),
+            field=models.ForeignKey(related_name='go_tos', blank=True, to='quiz.Question', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
