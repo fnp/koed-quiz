@@ -9,6 +9,6 @@ from quiz.models import Quiz
 register = template.Library()
 
 
-@register.simple_tag
-def quiz_footer():
-    return mark_safe(Quiz.current().footer)
+@register.simple_tag(takes_context=True)
+def quiz_footer(context):
+    return mark_safe(context.get('request').current_quiz.footer)

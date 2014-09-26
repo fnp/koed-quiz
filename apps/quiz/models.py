@@ -19,8 +19,8 @@ class Quiz(Site):
         verbose_name_plural = _('quizzes')
 
     @classmethod
-    def current(cls):
-        return cls.objects.get(id=settings.SITE_ID)
+    def current(cls, request):
+        return cls.objects.get(domain=request.get_host())
 
     def start(self):
         return self.question_set.all()[0]

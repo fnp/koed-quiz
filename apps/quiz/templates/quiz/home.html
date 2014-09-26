@@ -2,16 +2,16 @@
 {% load i18n %}
 
 
-{% block "title" %}{{ quiz.name }}{% endblock %}
-{% block "header" %}{{ quiz.name }}{% endblock %}
+{% block "title" %}{{ request.current_quiz.name }}{% endblock %}
+{% block "header" %}{{ request.current_quiz.name }}{% endblock %}
 
 
 {% block "body" %}
 
 <div>
-{{ quiz.description|safe }}
+{{ request.current_quiz.description|safe }}
 </div>
 
-<a class='big-button' href="{{ quiz.get_absolute_url }}">{% trans "Start the test!" %}</a>
+<a class='big-button' href="{{ request.current_quiz.get_absolute_url }}">{% trans "Start the test!" %}</a>
 
 {% endblock %}

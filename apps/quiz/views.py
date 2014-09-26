@@ -10,10 +10,10 @@ from quiz.models import Quiz
 
 def question(request, slug=None):
     if slug is None:
-        question = Quiz.current().start()
+        question = request.current_quiz.start()
         request.session['ticket'] = [request.path]
     else:
-        question = get_object_or_404(Quiz.current().question_set, slug=slug)
+        question = get_object_or_404(request.current_quiz.question_set, slug=slug)
 
     ticket = request.session.get('ticket', [])
     valid = request.path in ticket
@@ -58,6 +58,6 @@ def result(request, slug=None):
     elif ticket:
         valid_url = ticket[-1]
 
-    result = get_object_or_404(Quiz.current().result_set, slug=slug)
+    result = get_object_or_404(request.current_quiz.result_set, slug=slug)
     return render(request, "quiz/result_detail.html", locals())
 
