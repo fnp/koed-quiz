@@ -1,2 +1,1 @@
-# Django basics
-Django>=1.7,<1.8
+Django==2.2.5

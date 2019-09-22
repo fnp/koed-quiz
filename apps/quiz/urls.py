@@ -1,12 +1,12 @@
-# -*- coding: utf-8 -*-
 # This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
 # Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
 #
-from django.conf.urls import patterns, url
+from django.urls import path
+from . import views
 
 
-urlpatterns = patterns('quiz.views',
-    url(r'^$', 'question', name='quiz'),
-    url(r'^q/(?P<slug>[^/]*)/$', 'question', name='quiz'),
-    url(r'^r/(?P<slug>[^/]*)/$', 'result', name='quiz_result'),
-)
+urlpatterns = [
+    path('', views.question, name='quiz'),
+    path('q/<slug>/', views.question, name='quiz'),
+    path('r/<slug>/', views.result, name='quiz_result'),
+]

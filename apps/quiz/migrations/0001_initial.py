@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.db import models, migrations
 
 
@@ -45,7 +42,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Quiz',
             fields=[
-                ('site_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='sites.Site')),
+                ('site_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='sites.Site', on_delete=models.CASCADE)),
                 ('description', models.TextField()),
                 ('footer', models.TextField(null=True, blank=True)),
             ],
@@ -62,7 +59,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField()),
                 ('title', models.CharField(max_length=255)),
                 ('text', models.TextField()),
-                ('quiz', models.ForeignKey(to='quiz.Quiz')),
+                ('quiz', models.ForeignKey(to='quiz.Quiz', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['quiz', 'title'],
@@ -74,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='quiz',
-            field=models.ForeignKey(to='quiz.Quiz'),
+            field=models.ForeignKey(to='quiz.Quiz', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
@@ -84,19 +81,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='answer',
             name='go_to',
-            field=models.ForeignKey(related_name='go_tos', blank=True, to='quiz.Question', null=True),
+            field=models.ForeignKey(related_name='go_tos', blank=True, to='quiz.Question', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='answer',
             name='question',
-            field=models.ForeignKey(to='quiz.Question'),
+            field=models.ForeignKey(to='quiz.Question', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='answer',
             name='result',
-            field=models.ForeignKey(blank=True, to='quiz.Result', null=True),
+            field=models.ForeignKey(blank=True, to='quiz.Result', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

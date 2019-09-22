@@ -4,7 +4,7 @@ KOED-Quiz
 License
 -------
 
-    Copyright © 2011,2012 Fundacja Nowoczesna Polska <fundacja@nowoczesnapolska.org.pl>
+    Copyright © 2011,2012,2014,2019 Fundacja Nowoczesna Polska <fundacja@nowoczesnapolska.org.pl>
 
     For full list of contributors see AUTHORS section at the end.
 

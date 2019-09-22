@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # This file is part of KOED-Quiz, licensed under GNU Affero GPLv3 or later.
 # Copyright © Fundacja Nowoczesna Polska. See NOTICE for more information.
 #
 from django.db import models
 from django.contrib.sites.models import Site
-from django.utils.encoding import python_2_unicode_compatible
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
@@ -20,14 +19,16 @@ class Quiz(Site):
 
     @classmethod
     def current(cls, request):
-        return cls.objects.get(domain=request.get_host().rstrip('.'))
+        try:
+            return cls.objects.get(domain=request.get_host().rstrip('.'))
+        except cls.DoesNotExist:
+            pass
 
     def start(self):
         return self.question_set.all()[0]
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('quiz', )
+        return reverse('quiz')
 
     def where_to(self):
         try:
@@ -37,9 +38,8 @@ class Quiz(Site):
             return self.get_absolute_url()
 
 
-@python_2_unicode_compatible
 class Result(models.Model):
-    quiz = models.ForeignKey(Quiz)
+    quiz = models.ForeignKey(Quiz, models.CASCADE)
     slug = models.SlugField(db_index=True)
     title = models.CharField(max_length=255)
     text = models.TextField()
@@ -52,14 +52,12 @@ class Result(models.Model):
     def __str__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('quiz_result', [self.slug])
+        return reverse('quiz_result', args=[self.slug])
 
 
-@python_2_unicode_compatible
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz)
+    quiz = models.ForeignKey(Quiz, models.CASCADE)
     slug = models.SlugField(db_index=True)
     ordering = models.SmallIntegerField()
     title = models.CharField(max_length=255)
@@ -75,9 +73,8 @@ class Question(models.Model):
     def __str__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('quiz', [self.slug])
+        return reverse('quiz', args=[self.slug])
 
     def where_to(self):
         later = self.quiz.question_set.filter(ordering__gt=self.ordering)
@@ -87,13 +84,12 @@ class Question(models.Model):
             return self.quiz.where_to()
 
 
-@python_2_unicode_compatible
 class Answer(models.Model):
     title = models.CharField(max_length=255)
-    question = models.ForeignKey(Question)
-    go_to = models.ForeignKey(Question, null=True, blank=True,
+    question = models.ForeignKey(Question, models.CASCADE)
+    go_to = models.ForeignKey(Question, models.SET_NULL, null=True, blank=True,
             related_name='go_tos')
-    result = models.ForeignKey(Result, null=True, blank=True)
+    result = models.ForeignKey(Result, models.SET_NULL, null=True, blank=True)
     ordering = models.SmallIntegerField()
 
     class Meta:
